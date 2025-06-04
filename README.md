@@ -90,4 +90,45 @@ Run tests
 Build Docker images when you push code
 
 You don’t need to run anything — it works automatically when you push to GitHub.
+ Step 6: Continuous Deployment (CD) with GitHub Actions
+This project includes a basic CD pipeline that runs automatically on every push to the main branch. The workflow is defined in:
+
+bash
+Copy
+Edit
+.github/workflows/cd.yml
+What This CD Pipeline Does:
+Checks out the latest code
+
+Builds Docker images for both microservices
+
+Optionally runs containers to verify the services build and start
+
+🧪 To Test the CD Pipeline Locally (Manual Steps)
+If you want to manually test the CD process on your machine (without GitHub Actions), you can do this:
+
+For Auth Service:
+bash
+Copy
+Edit
+cd services/auth-service
+docker build -t auth-service:latest .
+docker run -d -p 5000:5000 --name auth-service auth-service:latest
+For Product Service:
+bash
+Copy
+Edit
+cd services/product-service
+docker build -t product-service:latest .
+docker run -d -p 3000:3000 --name product-service product-service:latest
+Then open in browser:
+
+Auth Service: http://localhost:5000
+
+Product Service: http://localhost:3000
+
+✅ Summary of GitHub Actions Workflows
+Workflow	File	Description
+CI	.github/workflows/ci.yml	Runs linting, tests, and dependency install for each service
+CD	.github/workflows/cd.yml	Builds Docker images and runs them to verify boot-up (local-only setup)
 
