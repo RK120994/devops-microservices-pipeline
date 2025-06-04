@@ -20,7 +20,7 @@ jobs:
 
       - name: Check if auth-service exists
         run: |
-          if [ ! -f "./services/auth-service/requirements.txt" ]; then
+          if [ ! -f "./devops-microservices-pipeline/services/auth-service/requirements.txt" ]; then
             echo "Auth service not found."
             exit 1
           fi
