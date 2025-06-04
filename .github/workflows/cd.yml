@@ -1,0 +1,28 @@
+name: CD Pipeline (Local Only)
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-auth-service:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Docker
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build Docker image
+        working-directory: ./devops-microservices-pipeline/services/auth-service
+        run: |
+          docker build -t auth-service:latest .
+
+      - name: Run container for test (optional)
+        run: |
+          docker run -d --rm -p 8000:8000 --name auth-service auth-service:latest
+          sleep 5
+          docker ps  # Check if it's running
