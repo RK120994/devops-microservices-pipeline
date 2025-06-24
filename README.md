@@ -37,15 +37,11 @@ cd devops-microservices-pipeline
 ### Step 2: Run the Microservices with Docker
 For Auth Service
 bash
-Copy
-Edit
 cd services/auth-service
 docker build -t auth-service .
 docker run -d -p 5000:5000 auth-service
 For Product Service
 bash
-Copy
-Edit
 cd ../product-service
 docker build -t product-service .
 docker run -d -p 3000:3000 product-service
@@ -59,8 +55,6 @@ Product Service → http://localhost:3000
 ⚠️ This step is only needed if you want to launch the services on a cloud provider like AWS.
 
 bash
-Copy
-Edit
 cd terraform
 terraform init
 terraform apply
@@ -68,8 +62,6 @@ This will create the servers and show you their IP addresses at the end.
 
 ### Step 4: Enable Monitoring
 bash
-Copy
-Edit
 cd monitoring
 docker-compose up -d
 Then open:
@@ -94,8 +86,6 @@ You don’t need to run anything — it works automatically when you push to Git
 This project includes a basic CD pipeline that runs automatically on every push to the main branch. The workflow is defined in:
 
 bash
-Copy
-Edit
 .github/workflows/cd.yml
 What This CD Pipeline Does:
 Checks out the latest code
@@ -109,15 +99,11 @@ If you want to manually test the CD process on your machine (without GitHub Acti
 
 For Auth Service:
 bash
-Copy
-Edit
 cd services/auth-service
 docker build -t auth-service:latest .
 docker run -d -p 5000:5000 --name auth-service auth-service:latest
 For Product Service:
 bash
-Copy
-Edit
 cd services/product-service
 docker build -t product-service:latest .
 docker run -d -p 3000:3000 --name product-service product-service:latest
